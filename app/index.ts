@@ -9,40 +9,68 @@ import { Overview } from './pages/checkout/overview.page';
 import { Complete } from './pages/checkout/complete.page';
 
 export class Application extends BasePage {
-  //Only pages and components extend through page
+  private cartInstance: Cart | undefined;
+  private headerInstance: Header | undefined;
+  private inventoryInstance: Inventory | undefined;
+  private loginInstance: Login | undefined;
+  private productDetailsInstance: ProductDetails | undefined;
+  private yourInformationInstance: YourInformation | undefined;
+  private overviewInstance: Overview | undefined;
+  private completeInstance: Complete | undefined;
 
-  //Example of eager initialization:
-  // public cart = new Cart(this.page);
-
-  /* Getters provide lazy initialization: 
-   page objects are instantiated only when accessed. */
-
-  get cart() {
-    return new Cart(this.page);
+  get cart(): Cart {
+    if (!this.cartInstance) {
+      this.cartInstance = new Cart(this.page);
+    }
+    return this.cartInstance;
   }
-  get header() {
-    return new Header(this.page);
+  
+  get header(): Header {
+    if (!this.headerInstance) {
+      this.headerInstance = new Header(this.page);
+    }
+    return this.headerInstance;
   }
-  get inventory() {
-    return new Inventory(this.page);
+  
+  get inventory(): Inventory {
+    if (!this.inventoryInstance) {
+      this.inventoryInstance = new Inventory(this.page);
+    }
+    return this.inventoryInstance;
   }
-  get login() {
-    return new Login(this.page);
-  }
-
-  get productDetails() {
-    return new ProductDetails(this.page);
-  }
-
-  get yourInformation() {
-    return new YourInformation(this.page);
-  }
-
-  get overview() {
-    return new Overview(this.page);
+  
+  get login(): Login {
+    if (!this.loginInstance) {
+      this.loginInstance = new Login(this.page);
+    }
+    return this.loginInstance;
   }
 
-  get complete() {
-    return new Complete(this.page);
+  get productDetails(): ProductDetails {
+    if (!this.productDetailsInstance) {
+      this.productDetailsInstance = new ProductDetails(this.page);
+    }
+    return this.productDetailsInstance;
+  }
+
+  get yourInformation(): YourInformation {
+    if (!this.yourInformationInstance) {
+      this.yourInformationInstance = new YourInformation(this.page);
+    }
+    return this.yourInformationInstance;
+  }
+
+  get overview(): Overview {
+    if (!this.overviewInstance) {
+      this.overviewInstance = new Overview(this.page);
+    }
+    return this.overviewInstance;
+  }
+
+  get complete(): Complete {
+    if (!this.completeInstance) {
+      this.completeInstance = new Complete(this.page);
+    }
+    return this.completeInstance;
   }
 }
