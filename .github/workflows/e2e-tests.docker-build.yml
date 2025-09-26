@@ -47,6 +47,8 @@ jobs:
             -e PERF_PASS="${{ secrets.PERF_PASS }}" \
             -e VISUAL_USER="${{ secrets.VISUAL_USER }}" \
             -e VISUAL_PASS="${{ secrets.VISUAL_PASS }}" \
+            -e REQRES_BASE_URL="${{ secrets.REQRES_BASE_URL }}" \
+            -e REQRES_API_KEY="${{ secrets.REQRES_API_KEY }}" \
             -v ${{ github.workspace }}/playwright-report:/app/playwright-report \
             demo-pw-e2e:latest bash -lc "npx playwright test --reporter=list,html --project=chromium --project=firefox --project=webkit"
 
