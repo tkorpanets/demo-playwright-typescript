@@ -7,6 +7,6 @@ node_modules/
 /playwright/.cache/
 /data/users.json
 config/.env.* 
-/app/storage/
+/tests/setup-ui/storage
 # VS Code
 .vscode             

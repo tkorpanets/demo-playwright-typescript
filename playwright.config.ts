@@ -1,17 +1,22 @@
 import { defineConfig, devices } from '@playwright/test';
-
 import * as dotenv from 'dotenv';
 import * as path from 'path';
 const target = process.env.ENV_TARGET || 'dev';
 if (!process.env.BASE_URL) {
-  dotenv.config({ path: path.resolve(__dirname, 'config', `.env.${target}`) });
+  dotenv.config({ path: path.resolve(__dirname, 'config', `.env.ui.${target}`) });
 }
 if (!process.env.BASE_URL) {
   throw new Error('BASE_URL is not defined. Set it via .env.<target> locally or secrets in CI.');
 }
+if (!process.env.REQRES_BASE_URL) {
+  dotenv.config({ path: path.resolve(__dirname, 'config', `.env.api`) });
+}
+if (!process.env.REQRES_BASE_URL) {
+  throw new Error('REQRES_BASE_URL is not defined. Add it to config/.env.api');
+}
 
 export default defineConfig({
-  testDir: './e2e',
+  testDir: './tests',
   outputDir: 'test-results/',
   /* Run tests in files in parallel */
   fullyParallel: true,
@@ -50,10 +55,12 @@ export default defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
+    //www.saucedemo.com/
     { name: 'setup', testMatch: /auth\.setup\.ts/ },
 
     {
       name: 'chromium',
+      testMatch: /tests\/ui\/.*\.test\.ts/,
       use: {
         ...devices['Desktop Chrome'],
         //viewport: { width: 1920, height: 1080 },
@@ -62,13 +69,26 @@ export default defineConfig({
     },
     {
       name: 'firefox',
+      testMatch: /tests\/ui\/.*\.test\.ts/,
       use: { ...devices['Desktop Firefox'] },
       dependencies: ['setup'],
     },
     {
       name: 'webkit',
+      testMatch: /tests\/ui\/.*\.test\.ts/,
       use: { ...devices['Desktop Safari'] },
       dependencies: ['setup'],
+    },
+    //reqres.in
+    {
+      name: 'api',
+      testMatch: /tests\/api\/.*\.test\.ts/,
+      use: {
+        baseURL: process.env.REQRES_BASE_URL,
+        trace: 'off',
+        screenshot: 'off',
+        video: 'off',
+      },
     },
   ],
 });
