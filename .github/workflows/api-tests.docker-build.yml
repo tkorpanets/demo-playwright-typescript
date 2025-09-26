@@ -30,6 +30,7 @@ jobs:
             -e CI=true \
             -e REQRES_BASE_URL="${{ secrets.REQRES_BASE_URL }}" \
             -e REQRES_API_KEY="${{ secrets.REQRES_API_KEY }}" \
+            -e BASE_URL="${{ secrets.BASE_URL }}" \
             -v ${{ github.workspace }}/playwright-report:/app/playwright-report \
             demo-pw-e2e:latest bash -lc "npm run test:api"
 

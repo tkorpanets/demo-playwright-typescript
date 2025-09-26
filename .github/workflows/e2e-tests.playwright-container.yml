@@ -38,6 +38,8 @@ jobs:
       PERF_PASS: ${{ secrets.PERF_PASS }}
       VISUAL_USER: ${{ secrets.VISUAL_USER }}
       VISUAL_PASS: ${{ secrets.VISUAL_PASS }}
+      REQRES_BASE_URL: ${{ secrets.REQRES_BASE_URL }}
+      REQRES_API_KEY: ${{ secrets.REQRES_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
