@@ -14,20 +14,24 @@
     "test:cart": "playwright test --grep @cart",
     "test:inventory": "playwright test --grep @inventory",
     "test:pdp": "playwright test --grep @pdp",
-    "test:api": "playwright test --project=api"
+    "test:api": "playwright test --project=api",
+    "swagger:prefetch": "ts-node scripts/prefetch-swagger.contract.ts",
+    "test:api-contract": "playwright test --project=api-contract"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",
     "@faker-js/faker": "10.0.0",
     "@playwright/test": "^1.55.0",
     "@types/node": "^24.0.15",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
     "eslint": "^9.34.0",
     "eslint-plugin-playwright": "^1.5.4",
     "globals": "^16.3.0",
     "jiti": "^2.5.1",
+    "joi": "^17.13.3",
     "typescript": "^5.9.2",
-    "typescript-eslint": "^8.42.0",
-    "joi": "^17.13.3"
+    "typescript-eslint": "^8.42.0"
   },
   "dependencies": {
     "dotenv": "^17.2.1"

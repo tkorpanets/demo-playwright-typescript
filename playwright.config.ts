@@ -90,5 +90,15 @@ export default defineConfig({
         video: 'off',
       },
     },
+    {
+      name: 'api-contract',
+      testMatch: /tests\/api\/contract\/.*\.test\.ts/,
+      use: {
+        baseURL: process.env.REQRES_BASE_URL,
+        trace: 'off',
+        screenshot: 'off',
+        video: 'off',
+      },
+    },
   ],
 });
