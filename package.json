@@ -15,7 +15,7 @@
     "test:inventory": "playwright test --grep @inventory",
     "test:pdp": "playwright test --grep @pdp",
     "test:api": "playwright test --project=api",
-    "swagger:prefetch": "ts-node scripts/prefetch-swagger.contract.ts",
+    "swagger:prefetch": "npx ts-node scripts/prefetch-swagger.contract.ts",
     "test:api-contract": "playwright test --project=api-contract"
   },
   "devDependencies": {
