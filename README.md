@@ -135,7 +135,7 @@ Quick start:
 ```ini
 # config/.env.api
 REQRES_BASE_URL=https://reqres.in
-REQRES_API_KEY=reqres-free-v1
+REQRES_API_KEY=pro_66b7436ade601d3eda4bb4a5568ff4d7aa898ff0611295b19a15147896db4e18 (https://app.reqres.in/ > Try your API)
 ```
 
 Run:

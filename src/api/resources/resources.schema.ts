@@ -20,6 +20,7 @@ export const listResourcesSchema = Joi.object({
     url: Joi.string().uri().required(),
     text: Joi.string().required(),
   }).required(),
+  _meta: Joi.object().optional(),
 });
 
 export const singleResourceSchema = Joi.object({
@@ -34,4 +35,5 @@ export const singleResourceSchema = Joi.object({
     url: Joi.string().uri().required(),
     text: Joi.string().required(),
   }).required(),
+  _meta: Joi.object().optional(),
 });

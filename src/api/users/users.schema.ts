@@ -20,6 +20,7 @@ export const listUsersSchema = Joi.object({
     url: Joi.string().uri().required(),
     text: Joi.string().required(),
   }).required(),
+  _meta: Joi.object().optional(),
 });
 
 export const singleUserSchema = Joi.object({
@@ -34,6 +35,7 @@ export const singleUserSchema = Joi.object({
     url: Joi.string().uri().required(),
     text: Joi.string().required(),
   }).required(),
+  _meta: Joi.object().optional(),
 });
 
 export const createUserSchema = Joi.object({
@@ -41,10 +43,12 @@ export const createUserSchema = Joi.object({
   job: Joi.string().required(),
   id: Joi.string().required(),
   createdAt: Joi.string().isoDate().required(),
+  _meta: Joi.object().optional(),
 });
 
 export const updateUserSchema = Joi.object({
   name: Joi.string().optional(),
   job: Joi.string().optional(),
   updatedAt: Joi.string().isoDate().required(),
+  _meta: Joi.object().optional(),
 });
