@@ -17,9 +17,9 @@ export class Inventory extends AppPage {
 
   @step()
   async expectLoaded(): Promise<void> {
-    await expect(this.page.locator(this.productCardSelector).first()).toBeVisible();
+    await expect.soft(this.page.locator(this.productCardSelector).first()).toBeVisible();
     const productCount = await this.page.locator(this.productCardSelector).count();
-    expect(productCount).toBeGreaterThan(2);
+    expect.soft(productCount).toBeGreaterThan(2);
   }
 
   @step()
@@ -27,15 +27,15 @@ export class Inventory extends AppPage {
     const productCards = this.page.locator(this.productCardSelector);
     const count = await productCards.count();
 
-    expect(count).toBeGreaterThan(0);
+    expect.soft(count).toBeGreaterThan(0);
 
     const validations = [];
     for (let i = 0; i < count; i++) {
       const product = productCards.nth(i);
-      validations.push(expect(product.locator(this.productNameSelector)).toHaveText(/.+/));
-      validations.push(expect(product.locator(this.productDescriptionSelector)).toHaveText(/^.{10,}$/));
-      validations.push(expect(product.locator(this.productPriceSelector)).toHaveText(/^\$\d+\.\d{2}$/));
-      validations.push(expect(product.locator(this.productAddToCartButtonSelector)).toBeVisible());
+      validations.push(expect.soft(product.locator(this.productNameSelector)).toHaveText(/.+/));
+      validations.push(expect.soft(product.locator(this.productDescriptionSelector)).toHaveText(/^.{10,}$/));
+      validations.push(expect.soft(product.locator(this.productPriceSelector)).toHaveText(/^\$\d+\.\d{2}$/));
+      validations.push(expect.soft(product.locator(this.productAddToCartButtonSelector)).toBeVisible());
     }
     await Promise.all(validations);
   }
@@ -98,7 +98,7 @@ export class Inventory extends AppPage {
     } else if (sortOrder === 'Price (high to low)') {
       sorted = [...prices].sort((a, b) => b - a);
     }
-    expect(prices).toEqual(sorted);
+    expect.soft(prices).toEqual(sorted);
   }
 
   @step()
@@ -122,7 +122,7 @@ export class Inventory extends AppPage {
     } else if (sortOrder === 'Name (Z to A)') {
       sorted = [...names].sort().reverse();
     }
-    expect(names).toEqual(sorted);
+    expect.soft(names).toEqual(sorted);
   }
 
   @step()
@@ -138,7 +138,7 @@ export class Inventory extends AppPage {
 
   @step()
   async expectButtonLabel(productName: string, label: 'Add to cart' | 'Remove'): Promise<void> {
-    await expect(this.productButtonByName(productName)).toHaveText(label);
+    await expect.soft(this.productButtonByName(productName)).toHaveText(label);
   }
 
   @step()

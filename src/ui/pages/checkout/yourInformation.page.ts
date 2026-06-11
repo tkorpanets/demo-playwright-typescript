@@ -15,11 +15,11 @@ export class YourInformation extends AppPage {
   @step()
   async expectLoaded() {
     await Promise.all([
-      expect(this.inputFirstName).toBeVisible(),
-      expect(this.inputLastName).toBeVisible(),
-      expect(this.inputPostalCode).toBeVisible(),
-      expect(this.cancelButton).toBeVisible(),
-      expect(this.continueButton).toBeVisible(),
+      expect.soft(this.inputFirstName).toBeVisible(),
+      expect.soft(this.inputLastName).toBeVisible(),
+      expect.soft(this.inputPostalCode).toBeVisible(),
+      expect.soft(this.cancelButton).toBeVisible(),
+      expect.soft(this.continueButton).toBeVisible(),
     ]);
   }
 
@@ -46,14 +46,14 @@ export class YourInformation extends AppPage {
 
   @step()
   async expectErrorMessage(errorMessage: string): Promise<void> {
-    await expect(this.errorMessage).toHaveText(errorMessage);
+    await expect.soft(this.errorMessage).toHaveText(errorMessage);
   }
 
   @step()
   async closeErrorIfVisible(): Promise<void> {
     if (await this.errorClose.isVisible()) {
       await this.errorClose.click();
-      await expect(this.errorMessage).toBeHidden();
+      await expect.soft(this.errorMessage).toBeHidden();
     }
   }
 
@@ -63,8 +63,8 @@ export class YourInformation extends AppPage {
     lastNamePlaceholder: string,
     postalCodePlaceholder: string
   ): Promise<void> {
-    await expect(this.inputFirstName).toHaveAttribute('placeholder', firstNamePlaceholder);
-    await expect(this.inputLastName).toHaveAttribute('placeholder', lastNamePlaceholder);
-    await expect(this.inputPostalCode).toHaveAttribute('placeholder', postalCodePlaceholder);
+    await expect.soft(this.inputFirstName).toHaveAttribute('placeholder', firstNamePlaceholder);
+    await expect.soft(this.inputLastName).toHaveAttribute('placeholder', lastNamePlaceholder);
+    await expect.soft(this.inputPostalCode).toHaveAttribute('placeholder', postalCodePlaceholder);
   }
 }

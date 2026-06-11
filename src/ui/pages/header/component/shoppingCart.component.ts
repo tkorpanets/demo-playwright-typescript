@@ -8,17 +8,17 @@ export class ShoppingCart extends AppComponent {
 
   @step()
   async expectLoaded(): Promise<void> {
-    await expect(this.shoppingCartIcon).toBeVisible();
+    await expect.soft(this.shoppingCartIcon).toBeVisible();
   }
 
   @step()
   async expectBadgeCount(count: number): Promise<void> {
-    await expect(this.shoppingCartBadge).toHaveText(String(count));
+    await expect.soft(this.shoppingCartBadge).toHaveText(String(count));
   }
 
   @step()
   async expectNoBadge(): Promise<void> {
-    await expect(this.shoppingCartBadge).not.toBeVisible();
+    await expect.soft(this.shoppingCartBadge).not.toBeVisible();
   }
 
   @step()

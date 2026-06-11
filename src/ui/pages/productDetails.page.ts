@@ -12,10 +12,10 @@ export class ProductDetails extends AppPage {
   @step()
   async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect(this.invName).toBeVisible(),
-      expect(this.invDescription).toBeVisible(),
-      expect(this.invPrice).toBeVisible(),
-      expect(this.addToCartButton).toBeVisible(),
+      expect.soft(this.invName).toBeVisible(),
+      expect.soft(this.invDescription).toBeVisible(),
+      expect.soft(this.invPrice).toBeVisible(),
+      expect.soft(this.addToCartButton).toBeVisible(),
     ]);
   }
 
@@ -27,22 +27,22 @@ export class ProductDetails extends AppPage {
   @step()
   async expectButtonLabel(label: 'Add to cart' | 'Remove'): Promise<void> {
     if (label === 'Add to cart') {
-      await expect(this.addToCartButton).toHaveText('Add to cart');
-      await expect(this.removeButton).toBeHidden();
+      await expect.soft(this.addToCartButton).toHaveText('Add to cart');
+      await expect.soft(this.removeButton).toBeHidden();
     } else {
-      await expect(this.removeButton).toHaveText('Remove');
-      await expect(this.addToCartButton).toBeHidden();
+      await expect.soft(this.removeButton).toHaveText('Remove');
+      await expect.soft(this.addToCartButton).toBeHidden();
     }
   }
 
   @step()
   async expectItemDescription(descriptionValue: string): Promise<void> {
-    await expect(this.invDescription).toContainText(descriptionValue);
+    await expect.soft(this.invDescription).toContainText(descriptionValue);
   }
 
   @step()
   async expectItemPrice(priceValue: string): Promise<void> {
-    await expect(this.invPrice).toContainText(priceValue);
+    await expect.soft(this.invPrice).toContainText(priceValue);
   }
 
   @step()

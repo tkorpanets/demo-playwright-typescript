@@ -13,10 +13,10 @@ export class Login extends AppPage {
   @step()
   async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect(this.logo).toHaveText('Swag Labs'),
-      expect(this.inputUsername).toBeVisible(),
-      expect(this.inputPassword).toBeVisible(),
-      expect(this.buttonLogin).toBeVisible(),
+      expect.soft(this.logo).toHaveText('Swag Labs'),
+      expect.soft(this.inputUsername).toBeVisible(),
+      expect.soft(this.inputPassword).toBeVisible(),
+      expect.soft(this.buttonLogin).toBeVisible(),
     ]);
   }
 
@@ -34,25 +34,25 @@ export class Login extends AppPage {
 
   @step()
   async expectErrorMessage(errorMessage: string): Promise<void> {
-    await expect(this.errorMessage).toHaveText(errorMessage);
+    await expect.soft(this.errorMessage).toHaveText(errorMessage);
   }
 
   @step()
   async closeErrorIfVisible(): Promise<void> {
     if (await this.errorClose.isVisible()) {
       await this.errorClose.click();
-      await expect(this.errorMessage).toBeHidden();
+      await expect.soft(this.errorMessage).toBeHidden();
     }
   }
 
   @step()
   async expectPlaceholders(usernamePlaceholder: string, passwordPlaceholder: string): Promise<void> {
-    await expect(this.inputUsername).toHaveAttribute('placeholder', usernamePlaceholder);
-    await expect(this.inputPassword).toHaveAttribute('placeholder', passwordPlaceholder);
+    await expect.soft(this.inputUsername).toHaveAttribute('placeholder', usernamePlaceholder);
+    await expect.soft(this.inputPassword).toHaveAttribute('placeholder', passwordPlaceholder);
   }
 
   @step()
   async expectPasswordHidden(): Promise<void> {
-    await expect(this.inputPassword).toHaveAttribute('type', 'password');
+    await expect.soft(this.inputPassword).toHaveAttribute('type', 'password');
   }
 }

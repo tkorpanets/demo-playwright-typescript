@@ -11,10 +11,10 @@ export class Complete extends AppPage {
   @step()
   async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect(this.image).toBeVisible(),
-      expect(this.header).toBeVisible(),
-      expect(this.text).toBeVisible(),
-      expect(this.backHomeButton).toBeVisible(),
+      expect.soft(this.image).toBeVisible(),
+      expect.soft(this.header).toBeVisible(),
+      expect.soft(this.text).toBeVisible(),
+      expect.soft(this.backHomeButton).toBeVisible(),
     ]);
   }
 
