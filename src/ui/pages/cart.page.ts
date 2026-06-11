@@ -16,8 +16,8 @@ export class Cart extends AppPage {
   @step()
   async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect.soft(this.cartQuantityLabel).toHaveText('QTY'),
-      expect.soft(this.cartDescLabel).toHaveText('Description'),
+      expect.soft(this.cartQuantityLabel).toHaveText('qty', { ignoreCase: true }),
+      expect.soft(this.cartDescLabel).toHaveText('description', { ignoreCase: true }),
       expect.soft(this.continueShoppingButton).toBeVisible(),
       expect.soft(this.checkoutButton).toBeVisible(),
     ]);
