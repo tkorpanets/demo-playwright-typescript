@@ -32,7 +32,7 @@ export class Cart extends AppPage {
   async removeProducts(products: string[]): Promise<void> {
     for (const product of products) {
       await this.buttonRemove(product).click();
-      await expect.soft(this.buttonRemove(product)).not.toBeVisible();
+      await expect.soft(this.buttonRemove(product)).toBeVisible({ visible: false });
     }
   }
 

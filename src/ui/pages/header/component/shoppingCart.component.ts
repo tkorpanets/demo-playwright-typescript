@@ -18,7 +18,7 @@ export class ShoppingCart extends AppComponent {
 
   @step()
   async expectNoBadge(): Promise<void> {
-    await expect.soft(this.shoppingCartBadge).not.toBeVisible();
+    await expect.soft(this.shoppingCartBadge).toBeVisible({ visible: false });
   }
 
   @step()
