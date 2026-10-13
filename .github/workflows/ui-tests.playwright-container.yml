@@ -6,7 +6,7 @@
 # - Uploads HTML report and deploys it to GitHub Pages.
 # ---------------------------------------------------------------------------
 
-name: E2E Tests (Node runner)
+name: E2E Tests (Playwright container)
 
 on:
   workflow_dispatch:
@@ -23,7 +23,7 @@ jobs:
     timeout-minutes: 60
     runs-on: ubuntu-latest
 
-    container: mcr.microsoft.com/playwright:v1.55.0-noble
+    container: mcr.microsoft.com/playwright:v1.60.0-noble
 
     environment: ${{ github.event.inputs.target }}
 
