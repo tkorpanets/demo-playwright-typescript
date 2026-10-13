@@ -35,7 +35,7 @@
     "joi": "^17.13.3",
     "typescript": "^5.9.2",
     "typescript-eslint": "^8.42.0",
-    "faker-js/faker": "^10.6.0"
+    "@faker-js/faker": "^10.6.0"
   },
   "dependencies": {
     "dotenv": "^17.2.1"
