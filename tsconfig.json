@@ -3,7 +3,7 @@
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Language and Environment */
-    "target": "es2016",
+    "target": "ES2022",
 
     /* Modules */
     "module": "commonjs",
@@ -20,6 +20,8 @@
     "strict": true,
     "noUnusedLocals": true,
     "noImplicitReturns": true,
+    "noUncheckedIndexedAccess": true,
+    "noFallthroughCasesInSwitch": true,
 
     /* Completeness */
     "skipLibCheck": true

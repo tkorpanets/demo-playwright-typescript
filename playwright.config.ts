@@ -5,14 +5,8 @@ const target = process.env.ENV_TARGET || 'dev';
 if (!process.env.BASE_URL) {
   dotenv.config({ path: path.resolve(__dirname, 'config', `.env.ui.${target}`) });
 }
-if (!process.env.BASE_URL) {
-  throw new Error('BASE_URL is not defined. Set it via .env.<target> locally or secrets in CI.');
-}
 if (!process.env.REQRES_BASE_URL) {
   dotenv.config({ path: path.resolve(__dirname, 'config', `.env.api`) });
-}
-if (!process.env.REQRES_BASE_URL) {
-  throw new Error('REQRES_BASE_URL is not defined. Add it to config/.env.api');
 }
 
 export default defineConfig({
@@ -83,6 +77,7 @@ export default defineConfig({
     {
       name: 'api',
       testMatch: /tests\/api\/.*\.test\.ts/,
+      testIgnore: /tests\/api\/contract\/.*\.test\.ts/,
       use: {
         baseURL: process.env.REQRES_BASE_URL,
         trace: 'off',

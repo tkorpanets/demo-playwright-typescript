@@ -11,6 +11,18 @@ Detects:
 - Extra or misspelled keys
 - Incorrect value types
 
+## Local quality gate
+
+### `npm run check`
+
+Runs the same non-network quality gate used by pull requests:
+
+1. strict TypeScript compilation;
+2. ESLint with zero warnings;
+3. Playwright test discovery for every configured project.
+
+Test discovery catches invalid imports, duplicate project matching, malformed fixtures, and configuration errors without executing external UI or API calls.
+
 ---
 
 ## Linting
@@ -28,6 +40,15 @@ Detects:
 - Code style violations
 
 > Using `--max-warnings=0` enforces zero tolerance: even warnings block the pipeline.
+
+## Test design rules
+
+- Page objects contain locators and user actions, not random test-data generation.
+- `expectLoaded()` is a hard precondition and must fail immediately.
+- Soft assertions are reserved for deliberate multi-field verification inside tests.
+- Negative API requests have explicit client methods instead of bypassing TypeScript with casts.
+- Functional API and OpenAPI contract suites are isolated Playwright projects.
+- Cleanup fixtures must not add secondary errors after the test has already failed.
 
 ## Run with Docker locally
 

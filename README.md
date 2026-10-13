@@ -80,7 +80,7 @@ npx playwright show-report
 
 ```bash
 npx playwright test --grep "@smoke"
-npx playwright test e2e/cart/
+npx playwright test tests/ui/cart/
 
 # Run cross-browser (if enabled in playwright.config.ts)
 npx playwright test --project=firefox
@@ -135,7 +135,7 @@ Quick start:
 ```ini
 # config/.env.api
 REQRES_BASE_URL=https://reqres.in
-REQRES_API_KEY=pro_66b7436ade601d3eda4bb4a5568ff4d7aa898ff0611295b19a15147896db4e18 (https://app.reqres.in/ > Try your API)
+REQRES_API_KEY=<your-reqres-api-key>
 ```
 
 Run:
@@ -146,7 +146,7 @@ npm run test:api
 
 Playwright UI: select the `api` project before running.
 
-Files: `tests/api/*`, `app/api/*`, `app/fixtures/api.fixtures.ts`, `playwright.config.ts` (project `api`).
+Files: `tests/api/*`, `src/api/*`, `tests/api/fixtures/api.fixture.ts`, `playwright.config.ts` (projects `api` and `api-contract`).
 
 Links: [`https://reqres.in/`](https://reqres.in/)
 
