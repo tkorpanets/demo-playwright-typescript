@@ -1,7 +1,12 @@
 import { expect } from '@playwright/test';
-import { faker } from '@faker-js/faker';
 import { AppPage } from '../base.page';
 import { step } from '../../utils/step-decorator';
+
+export type CheckoutInformation = {
+  firstName: string;
+  lastName: string;
+  postalCode: string;
+};
 
 export class YourInformation extends AppPage {
   private inputFirstName = this.page.getByTestId('firstName');
@@ -13,47 +18,43 @@ export class YourInformation extends AppPage {
   private errorClose = this.page.getByTestId('error-button');
 
   @step()
-  async expectLoaded() {
+  async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect.soft(this.inputFirstName).toBeVisible(),
-      expect.soft(this.inputLastName).toBeVisible(),
-      expect.soft(this.inputPostalCode).toBeVisible(),
-      expect.soft(this.cancelButton).toBeVisible(),
-      expect.soft(this.continueButton).toBeVisible(),
+      expect(this.inputFirstName).toBeVisible(),
+      expect(this.inputLastName).toBeVisible(),
+      expect(this.inputPostalCode).toBeVisible(),
+      expect(this.cancelButton).toBeVisible(),
+      expect(this.continueButton).toBeVisible(),
     ]);
   }
 
   @step()
-  async fillForm(data?: { firstName?: string; lastName?: string; postalCode?: string }) {
-    const first = data?.firstName ?? faker.person.firstName();
-    const last = data?.lastName ?? faker.person.lastName();
-    const zip = data?.postalCode ?? faker.location.zipCode('#####');
-
-    await this.inputFirstName.fill(first);
-    await this.inputLastName.fill(last);
-    await this.inputPostalCode.fill(zip);
+  async fillForm(data: CheckoutInformation): Promise<void> {
+    await this.inputFirstName.fill(data.firstName);
+    await this.inputLastName.fill(data.lastName);
+    await this.inputPostalCode.fill(data.postalCode);
   }
 
   @step()
-  async submitForm() {
+  async submitForm(): Promise<void> {
     await this.continueButton.click();
   }
 
   @step()
-  async cancelForm() {
+  async cancelForm(): Promise<void> {
     await this.cancelButton.click();
   }
 
   @step()
   async expectErrorMessage(errorMessage: string): Promise<void> {
-    await expect.soft(this.errorMessage).toHaveText(errorMessage);
+    await expect(this.errorMessage).toHaveText(errorMessage);
   }
 
   @step()
   async closeErrorIfVisible(): Promise<void> {
     if (await this.errorClose.isVisible()) {
       await this.errorClose.click();
-      await expect.soft(this.errorMessage).toBeHidden();
+      await expect(this.errorMessage).toBeHidden();
     }
   }
 
@@ -63,8 +64,8 @@ export class YourInformation extends AppPage {
     lastNamePlaceholder: string,
     postalCodePlaceholder: string
   ): Promise<void> {
-    await expect.soft(this.inputFirstName).toHaveAttribute('placeholder', firstNamePlaceholder);
-    await expect.soft(this.inputLastName).toHaveAttribute('placeholder', lastNamePlaceholder);
-    await expect.soft(this.inputPostalCode).toHaveAttribute('placeholder', postalCodePlaceholder);
+    await expect(this.inputFirstName).toHaveAttribute('placeholder', firstNamePlaceholder);
+    await expect(this.inputLastName).toHaveAttribute('placeholder', lastNamePlaceholder);
+    await expect(this.inputPostalCode).toHaveAttribute('placeholder', postalCodePlaceholder);
   }
 }

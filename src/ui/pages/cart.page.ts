@@ -16,23 +16,23 @@ export class Cart extends AppPage {
   @step()
   async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect.soft(this.cartQuantityLabel).toHaveText('qty', { ignoreCase: true }),
-      expect.soft(this.cartDescLabel).toHaveText('description', { ignoreCase: true }),
-      expect.soft(this.continueShoppingButton).toBeVisible(),
-      expect.soft(this.checkoutButton).toBeVisible(),
+      expect(this.cartQuantityLabel).toHaveText('qty', { ignoreCase: true }),
+      expect(this.cartDescLabel).toHaveText('description', { ignoreCase: true }),
+      expect(this.continueShoppingButton).toBeVisible(),
+      expect(this.checkoutButton).toBeVisible(),
     ]);
   }
 
   @step()
   async expectItemPrice(productName: string, priceValue: string): Promise<void> {
-    await expect.soft(this.price(productName)).toHaveText(priceValue);
+    await expect(this.price(productName)).toHaveText(priceValue);
   }
 
   @step()
-  async removeProducts(products: string[]): Promise<void> {
+  async removeProducts(products: readonly string[]): Promise<void> {
     for (const product of products) {
       await this.buttonRemove(product).click();
-      await expect.soft(this.buttonRemove(product)).toBeVisible({ visible: false });
+      await expect(this.buttonRemove(product)).toBeHidden();
     }
   }
 
@@ -48,12 +48,11 @@ export class Cart extends AppPage {
 
   @step()
   async expectProductsCount(expectItemCount: number): Promise<void> {
-    const actualItemCount = await this.page.locator('div.cart_item').count();
-    expect.soft(actualItemCount).toBe(expectItemCount);
+    await expect(this.cartItems).toHaveCount(expectItemCount);
   }
 
   @step()
   async expectNoItems(): Promise<void> {
-    expect.soft(await this.cartItems.count()).toBe(0);
+    await expect(this.cartItems).toHaveCount(0);
   }
 }

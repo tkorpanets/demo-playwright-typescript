@@ -11,7 +11,7 @@ apiTest.describe('Auth API', () => {
   });
 
   apiTest('should fail login when password is missing', async ({ api }) => {
-    const res = await api.auth.login({ email: 'peter@klaven', password: '' as unknown as string });
+    const res = await api.auth.loginWithoutPassword('peter@klaven');
     expectStatus(res, 400);
     const body = await getJson(res);
     expectSchema(errorSchema, body);

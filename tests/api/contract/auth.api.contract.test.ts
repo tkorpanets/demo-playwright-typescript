@@ -29,7 +29,7 @@ apiTest.describe('Auth API - Contract (OpenAPI)', () => {
   });
 
   apiTest('should fail login when password is missing (400)', async ({ api }) => {
-    const res: APIResponse = await api.auth.login({ email: 'peter@klaven', password: '' as unknown as string });
+    const res: APIResponse = await api.auth.loginWithoutPassword('peter@klaven');
     expectStatus(res, 400);
     const body = await getJson(res);
     const { ok, errors } = validateBySchema(login400, body);

@@ -24,23 +24,21 @@ apiTest.describe('Users API: CRUD', () => {
 
   apiTest('should create a new user', async ({ api }) => {
     const res = await api.users.createUser({ name: 'morpheus', job: 'leader' });
-    expectStatus(res, [201, 401]);
+    expectStatus(res, 201);
     const body = await getJson(res);
     expectSchema(createUserSchema, body);
   });
 
   apiTest('should update an existing user', async ({ api }) => {
     const res = await api.users.updateUser(2, { name: 'neo', job: 'one' });
-    expectStatus(res, [200, 401]);
+    expectStatus(res, 200);
     const body = await getJson(res);
     expectSchema(updateUserSchema, body);
   });
 
   apiTest('should delete a user', async ({ api }) => {
     const res = await api.users.deleteUser(2);
-    expectStatus(res, [204, 401]);
-    if (res.status() === 204) {
-      await expectEmptyBody(res);
-    }
+    expectStatus(res, 204);
+    await expectEmptyBody(res);
   });
 });

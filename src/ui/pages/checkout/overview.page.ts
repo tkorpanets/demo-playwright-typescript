@@ -33,59 +33,58 @@ export class Overview extends AppPage {
   //   private price = (productName: string) => this.productCard(productName).locator('div.inventory_item_price');
 
   @step()
-  async expectLoaded() {
+  async expectLoaded(): Promise<void> {
     await Promise.all([
-      expect.soft(this.cartQuantityLabel).toBeVisible(),
-      expect.soft(this.cartDescLabel).toBeVisible(),
-      expect.soft(this.labelPaymentInfo).toBeVisible(),
-      expect.soft(this.labelShippingInfo).toBeVisible(),
-      expect.soft(this.labelPriceTotal).toBeVisible(),
-      expect.soft(this.totalLabel).toBeVisible(),
-      expect.soft(this.subtotalLabel).toBeVisible(),
-      expect.soft(this.taxLabel).toBeVisible(),
-      expect.soft(this.totalLabel).toBeVisible(),
-      expect.soft(this.cancelButton).toBeVisible(),
-      expect.soft(this.finishButton).toBeVisible(),
+      expect(this.cartQuantityLabel).toBeVisible(),
+      expect(this.cartDescLabel).toBeVisible(),
+      expect(this.labelPaymentInfo).toBeVisible(),
+      expect(this.labelShippingInfo).toBeVisible(),
+      expect(this.labelPriceTotal).toBeVisible(),
+      expect(this.subtotalLabel).toBeVisible(),
+      expect(this.taxLabel).toBeVisible(),
+      expect(this.totalLabel).toBeVisible(),
+      expect(this.cancelButton).toBeVisible(),
+      expect(this.finishButton).toBeVisible(),
     ]);
   }
 
   @step()
-  async clickFinishButton() {
+  async clickFinishButton(): Promise<void> {
     await this.finishButton.click();
   }
 
   @step()
-  async clickCancelButton() {
+  async clickCancelButton(): Promise<void> {
     await this.cancelButton.click();
   }
 
   @step()
-  async expectedPaymentInfo(expectedLabelPayInfo: string, expectedValuePayInfo: string) {
-    await expect.soft(this.labelPaymentInfo).toContainText(expectedLabelPayInfo);
-    await expect.soft(this.valuePaymentInfo).toContainText(expectedValuePayInfo);
+  async expectedPaymentInfo(expectedLabelPayInfo: string, expectedValuePayInfo: string): Promise<void> {
+    await expect(this.labelPaymentInfo).toContainText(expectedLabelPayInfo);
+    await expect(this.valuePaymentInfo).toContainText(expectedValuePayInfo);
   }
 
   @step()
-  async expectedShippingInfo(expectedLabelShipInfo: string, expectedValueShipInfo: string) {
-    await expect.soft(this.labelShippingInfo).toContainText(expectedLabelShipInfo);
-    await expect.soft(this.valueShippingInfo).toContainText(expectedValueShipInfo);
+  async expectedShippingInfo(expectedLabelShipInfo: string, expectedValueShipInfo: string): Promise<void> {
+    await expect(this.labelShippingInfo).toContainText(expectedLabelShipInfo);
+    await expect(this.valueShippingInfo).toContainText(expectedValueShipInfo);
   }
 
   @step()
-  async expectPriceTotal({ itemTotal, taxRate, labels }: PriceTotalParams) {
-    await expect.soft(this.labelPriceTotal).toContainText(labels.priceTotal);
-    await expect.soft(this.subtotalLabel).toContainText(labels.itemTotal);
-    await expect.soft(this.subtotalLabel).toContainText(itemTotal.toFixed(2));
+  async expectPriceTotal({ itemTotal, taxRate, labels }: PriceTotalParams): Promise<void> {
+    await expect(this.labelPriceTotal).toContainText(labels.priceTotal);
+    await expect(this.subtotalLabel).toContainText(labels.itemTotal);
+    await expect(this.subtotalLabel).toContainText(itemTotal.toFixed(2));
     const expectedTax = Number((itemTotal * taxRate).toFixed(2));
-    await expect.soft(this.taxLabel).toContainText(labels.tax);
-    await expect.soft(this.taxLabel).toContainText(expectedTax.toFixed(2));
+    await expect(this.taxLabel).toContainText(labels.tax);
+    await expect(this.taxLabel).toContainText(expectedTax.toFixed(2));
     const expectedTotal = Number((itemTotal + expectedTax).toFixed(2));
-    await expect.soft(this.totalLabel).toContainText(labels.total);
-    await expect.soft(this.totalLabel).toContainText(expectedTotal.toFixed(2));
+    await expect(this.totalLabel).toContainText(labels.total);
+    await expect(this.totalLabel).toContainText(expectedTotal.toFixed(2));
   }
 
   @step()
-  async removeAllProducts(products: string[]) {
+  async removeAllProducts(products: readonly string[]): Promise<void> {
     const details = new ProductDetails(this.page);
     for (const product of products) {
       await this.productName(product).click();

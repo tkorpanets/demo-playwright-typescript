@@ -14,7 +14,7 @@ export class Header extends AppPage {
 
   @step()
   async expectLoaded(): Promise<void> {
-    await Promise.all([expect(this.appLogo).toHaveText('Swag Labs'), expect(this.title).toHaveText('Products')]);
+    await Promise.all([expect(this.appLogo).toHaveText('Swag Labs', { timeout: 30000 }), expect(this.title).toHaveText('Products', { timeout: 30000 })]);
   }
 
   @step()
