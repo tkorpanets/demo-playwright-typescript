@@ -9,7 +9,15 @@ export function getResponseSchema(openapi: OpenApiDoc, route: string, method: Ht
     throw new Error(`Operation not found for route ${route} and method ${method.toUpperCase()}`);
   }
 
-  const schema = op.responses[status].content['application/json'].schema;
+  const response = op.responses[status];
+  if (!response) {
+    throw new Error(`Response not found for route ${route}, method ${method.toUpperCase()}, status ${status}`);
+  }
+
+  const schema = response.content?.['application/json']?.schema;
+  if (!schema) {
+    throw new Error(`JSON schema not found for route ${route}, method ${method.toUpperCase()}, status ${status}`);
+  }
 
   // simple ref resolver: "#/components/schemas/Name"
   const ref = schema.$ref;
