@@ -26,7 +26,7 @@ jobs:
     environment: ${{ github.event.inputs.target }}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Build image
         run: docker build -t demo-pw-e2e:latest .
